@@ -1,5 +1,5 @@
 import { Plugin, PluginEvent } from '@posthog/plugin-scaffold'
-import { createHash, randomUUID } from 'crypto'
+import { createHash } from 'crypto'
 
 // From UUID Namespace RFC (https://datatracker.ietf.org/doc/html/rfc4122)
 const NAMESPACE_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8'
@@ -11,7 +11,7 @@ interface UnduplicatesPluginInterface {
 }
 
 const stringifyEvent = (event: PluginEvent): string => {
-    return `(${randomUUID().toString()}; project #${event.team_id}). Event "${event.event}" @ ${event.timestamp} for user ${event.distinct_id}.`
+    return `(${event.uuid}; project #${event.team_id}). Event "${event.event}" @ ${event.timestamp} for user ${event.distinct_id}.`
 }
 
 const byteToHex: string[] = []
